@@ -55,8 +55,11 @@ for _ in range(...):
 
 For a concrete simple example,
 please check out and run [`demo.py`](demo.py),
-where `train_loss = lambda x, y: x ** 2 + y ** 2`
-and `val_loss = lambda x, y: x ** 2`
+where
+```python
+train_loss = lambda x, y: x ** 2 + y ** 2
+val_loss = lambda x, y: x ** 2
+```
 with `x = y = 1.0` initially.
 It will generate a video `demo.mp4`
 showing the optimization trajectory
