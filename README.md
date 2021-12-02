@@ -57,7 +57,7 @@ For a concrete simple example,
 please check out and run [`demo.py`](demo.py),
 where
 ```python
-train_loss = lambda x, y: x ** 2 + y ** 2
+train_loss = lambda x, y: (x + y) ** 2
 val_loss = lambda x, y: x ** 2
 ```
 with `x = y = 1.0` initially.
