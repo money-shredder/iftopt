@@ -7,8 +7,9 @@ from .utils import flat_grad, ItemOrSequence
 
 
 def _hessian(
-        dtrain_dmodel: ItemOrSequence[Tensor],
-        model_parameters: ItemOrSequence[Tensor]) -> Tensor:
+    dtrain_dmodel: ItemOrSequence[Tensor],
+    model_parameters: ItemOrSequence[Tensor]
+) -> Tensor:
     grads: List[Tensor] = []
     if isinstance(dtrain_dmodel, Tensor):
         dtdms: Sequence[Tensor] = dtrain_dmodel.split(1)  # type: ignore
@@ -21,26 +22,25 @@ def _hessian(
 
 
 def true(
-        dval_dmodel: Tensor, dtrain_dmodel: Tensor,
-        model_parameters: ItemOrSequence[Tensor], *args: Any, **kwargs: Any
-    ) -> Tensor:
+    dval_dmodel: Tensor, dtrain_dmodel: Tensor,
+    model_parameters: ItemOrSequence[Tensor], *args: Any, **kwargs: Any
+) -> Tensor:
     """Performs true inverse-hessian-vector product.  """
+    # FIXME untested
     hess = _hessian(dtrain_dmodel, model_parameters)
     inv = torch.pinverse(hess)
     return dval_dmodel @ inv
 
 
 def neumann(
-        dval_dmodel: Tensor, dtrain_dmodel: Tensor,
-        model_parameters: ItemOrSequence[Tensor],
-        lr: float, iterations: int, *args: Any, **kwargs: Any
-    ) -> Tensor:
+    dval_dmodel: Tensor, dtrain_dmodel: Tensor,
+    model_parameters: ItemOrSequence[Tensor],
+    lr: float, iterations: int, *args: Any, **kwargs: Any
+) -> Tensor:
     """Neumann approximation of inverse-hessian-vector product."""
     p, v = (dval_dmodel.clone().detach() for _ in range(2))
-    # pbar = trange(iterations, desc='neumann', leave=None)
-    pbar = range(iterations)
     vnorm = v.norm()
-    for _ in pbar:
+    for _ in range(iterations):
         d = lr * flat_grad(
             dtrain_dmodel, model_parameters, grad_outputs=v, retain_graph=True)
         vn = v - d
