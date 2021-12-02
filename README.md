@@ -38,16 +38,16 @@ hopt = HyperOptimizer(
 for _ in range(...):
     # inner optimization loop for x
     for _ in range(...):
-        z = train_model(x, y)
+        z = train_loss(x, y)
         # inner optimization step for x
         opt.zero_grad()
         z.backward()
         opt.step()
     # outer optimization step for y
     hopt.set_train_parameters([x])
-    z = train_model(x, y)
+    z = train_loss(x, y)
     hopt.train_step(z)
-    v = val_model(x, y)
+    v = val_loss(x, y)
     hopt.val_step(v)
     hopt.grad()
     hopt.step()
