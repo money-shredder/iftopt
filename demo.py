@@ -36,7 +36,7 @@ def optimize(train_model: Model, val_model: Model) -> History:
     hopt = HyperOptimizer(
         [y], torch.optim.SGD([y], lr=0.1), vih_lr=0.1, vih_iterations=5)
     log(hist, x, y)
-    for _ in range(50):
+    for _ in range(25):
         for _ in range(5):
             z = train_model(x, y)
             opt.zero_grad()
@@ -53,7 +53,7 @@ def optimize(train_model: Model, val_model: Model) -> History:
             f'train_loss={float(z):.3g}, val_loss={float(v):.3g}.')
         hopt.grad()
         hopt.step()
-    log(hist, x, y)
+        log(hist, x, y)
     return hist
 
 
