@@ -59,7 +59,7 @@ where `train_loss = lambda x, y: x ** 2 + y ** 2`
 and `val_loss = lambda x, y: x ** 2`
 with `x = y = 1.0` initially.
 Even though the hyper-parameter `y`
-does not have a gradient w.r.t. the validation loss,
+does not have a direct gradient w.r.t. the validation loss,
 `iftopt` can still minimize the validation loss.
 It will generate a video `demo.avi`
 following the optimization trajectory
