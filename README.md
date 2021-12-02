@@ -64,4 +64,5 @@ does not have a direct gradient w.r.t. the validation loss,
 It will generate a video `demo.avi`
 following the optimization trajectory
 as shown in the animation below:
+
 ![assets/demo.gif](assets/demo.gif)
