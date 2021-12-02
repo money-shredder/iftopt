@@ -7,6 +7,12 @@ An Implicit Function Theorem (IFT) optimizer for bi-level optimizations.
 * Python 3.7+
 * PyTorch 1.x
 
+## Installation
+
+```bash
+$ pip install git+https://github.com/money-shredder/iftopt.git
+```
+
 ## Usage
 
 Assuming a bi-level optimization of the form:
@@ -28,9 +34,12 @@ opt = torch.optim.SGD([x], lr=train_lr)
 # validation loss optimizer
 hopt = HyperOptimizer(
     [y], torch.optim.SGD([y], lr=val_lr), vih_lr=0.1, vih_iterations=5)
-for _ in range(...):  # outer optimization loop for y
-    for _ in range(...):  # inner optimization loop for x
+# outer optimization loop for y
+for _ in range(...):
+    # inner optimization loop for x
+    for _ in range(...):
         z = train_model(x, y)
+        # inner optimization step for x
         opt.zero_grad()
         z.backward()
         opt.step()
