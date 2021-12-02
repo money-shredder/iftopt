@@ -58,11 +58,14 @@ please check out and run [`demo.py`](demo.py),
 where `train_loss = lambda x, y: x ** 2 + y ** 2`
 and `val_loss = lambda x, y: x ** 2`
 with `x = y = 1.0` initially.
-Even though the hyper-parameter `y`
-does not have a direct gradient w.r.t. the validation loss,
-`iftopt` can still minimize the validation loss.
-It will generate a video `demo.avi`
-following the optimization trajectory
-as shown in the animation below:
+It will generate a video `demo.mp4`
+showing the optimization trajectory
+in the animation below.
+Note that although the hyper-parameter `y`
+does not have a direct gradient
+w.r.t. the validation loss,
+`iftopt` can still minimize the validation loss
+by computing the hyper-gradient
+via implicit function theorem.
 
 ![assets/demo.gif](assets/demo.gif)
